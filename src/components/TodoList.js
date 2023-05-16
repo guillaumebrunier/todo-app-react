@@ -1,17 +1,22 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import { db } from './../utils/firebase';
+import { setDoc, doc, deleteDoc, getDoc } from "firebase/firestore";
 
 const TodoList = ({todos, setTodos}) => {
   const handleDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    deleteDoc(doc(db, 'todos', id));
   };
 
-  const handleComplete = (id) => {
-    setTodos(todos.map((todo) => {
-      return todo.id === id 
-        ? {...todo, completed: !todo.completed}
-        : todo
-    }));
+  const handleComplete = async (id) => {
+    const docSnap = await getDoc(doc(db, 'todos', id));
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      setDoc(doc(db, 'todos', id), {
+        ...data,
+        completed: !data.completed
+      });
+    }
   };
 
   return (
