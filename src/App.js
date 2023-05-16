@@ -1,8 +1,25 @@
+import { useState } from 'react';
 import './App.css';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import { v4 as uuidv4 } from 'uuid';
 
-function App() {
+const App = () => {
+  const [todos, setTodos] = useState([]);
+
+  const handleCreate = (title) => {
+    const todo = {
+      id: uuidv4(),
+      title: title
+    };
+  
+    setTodos([...todos, todo]);
+  };
+
   return (
-    <div className="App">
+    <div className="app">
+      <TodoForm onCreate={handleCreate} />
+      <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
 }
