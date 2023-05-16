@@ -18,6 +18,9 @@ const App = () => {
 
   return (
     <div className="app">
+      <div className="app__header">
+        What's up today ?
+      </div>
       <TodoForm onCreate={handleCreate} />
       <TodoList todos={todos} setTodos={setTodos} />
     </div>

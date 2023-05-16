@@ -3,13 +3,11 @@ import React from 'react';
 const TodoItem = ({id, title, completed, onDelete, onComplete}) => {
   return (
     <div className={`todoItem ${completed ? 'todoItem--completed' : ''}`}>
-      <div>
+      <span className="todoItem__dot"></span>
+      <div className="todoItem__title" onClick={() => onComplete(id)}>
         {title}
       </div>
-      <div>
-        <button onClick={() => onComplete(id)}>Complete</button>
-        <button onClick={() => onDelete(id)}>Delete</button>
-      </div>
+      <button className="todoItem__delete" onClick={() => onDelete(id)}></button>
     </div>
   );
 };

@@ -5,15 +5,17 @@ const TodoForm = ({onCreate}) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onCreate(title);
-    setTitle('');
+    if (title) {
+      onCreate(title);
+      setTitle('');
+    }
   };
 
   return (
     <div className="todoForm">
         <form onSubmit={onSubmit}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <button type="submit">Add</button>
+            <input className="todoForm__input" type="text" placeholder="Add todo..." value={title} onChange={(e) => setTitle(e.target.value)} />
+            <button className="todoForm__submit" type="submit"><i></i></button>
         </form>
     </div>
   )
